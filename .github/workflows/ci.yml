@@ -1,0 +1,28 @@
+name: BLAS Level3 CI
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install OpenBLAS
+        run: |
+          sudo apt update
+          sudo apt install -y gcc libopenblas-dev
+
+      - name: Build tests
+        run: |
+          gcc test_cblas_level3.c -o test_runner -lopenblas -lm
+
+      - name: Run tests
+        run: |
+          ./test_runner
