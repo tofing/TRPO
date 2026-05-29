@@ -212,5 +212,5 @@ int main() {
     test_strsm();
     test_ssyr2k();
     printf("All tests done.\n");
-    return 0;
+    return 1;
 }
